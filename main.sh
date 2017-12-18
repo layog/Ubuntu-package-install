@@ -88,7 +88,7 @@ function help() {
 # Main function
 function main() {
     # set default install packages file name
-    defaultFileName="install.config"
+    local defaultFileName="install.config"
 
     # Reading arguments
     while getopts ":a:" opt;
@@ -97,14 +97,14 @@ function main() {
             a)
                 echo "Installing packages using ${OPTARG}"
                 echo " "
-                installFileName=${OPTARG}
+                local installFileName=${OPTARG}
                 installListedPackages ${installFileName} >&2
                 ;;
             :)
                 if [ ${OPTARG} == a ]; then
                     echo "Using default file for installing packages ${defaultFileName}"
                     echo " "
-                    installFileName=${defaultFileName}
+                    local installFileName=${defaultFileName}
                     installListedPackages ${installFileName} >&2
                 fi
                 ;;
