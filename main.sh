@@ -45,18 +45,24 @@ function installListedPackages() {
     # For each package get its info from the folder
     while read -r packageName
     do
-        packagePath="${SCRIPTPATH}/package-info/${packageName}"
-        if [ $(contains "${availablePackages[@]}" "${packagePath}") == "y" ]; then
-            echo "Installing ${packageName}"
-            while read -r executeInfo
-            do
-                ${executeInfo}
-            done < ${packagePath}
-        else
-            echo "Package ${packageName} information is not available"
-        fi
+        installPackage ${packageName}
     done < ${SCRIPTPATH}/${packageConfigFile}
-} 
+}
+
+
+function installPackage() {
+    local packageName="$1"
+    local packagePath="${SCRIPTPATH}/package-info/${packageName}"
+    if [ $(contains "${availablePackages[@]}" "${packagePath}") == "y" ]; then
+        echo "Installing ${packageName}"
+        while read -r executeInfo
+        do
+            ${executeInfo}
+        done < ${packagePath}
+    else
+        echo "Package ${packageName} information is not available"
+    fi
+}
 
 
 function help() {
