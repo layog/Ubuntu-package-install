@@ -62,6 +62,7 @@ function installPackage() {
     else
         echo "Package ${packageName} information is not available"
     fi
+    echo " "
 }
 
 
@@ -91,7 +92,7 @@ function main() {
     local defaultFileName="install.config"
 
     # Reading arguments
-    while getopts ":a:" opt;
+    while getopts ":a:p:" opt;
     do
         case ${opt} in
             a)
@@ -100,12 +101,19 @@ function main() {
                 local installFileName=${OPTARG}
                 installListedPackages ${installFileName} >&2
                 ;;
+            p)
+                local packageName=${OPTARG}
+                installPackage ${packageName}
+                ;;
             :)
                 if [ ${OPTARG} == a ]; then
                     echo "Using default file for installing packages ${defaultFileName}"
                     echo " "
                     local installFileName=${defaultFileName}
                     installListedPackages ${installFileName} >&2
+                elif [ ${OPTARG} == p ]; then
+                    echo "-p flag needs a package name to be installed"
+                    help 1
                 fi
                 ;;
             \?)
