@@ -136,17 +136,21 @@ function main() {
                 echo " "
                 local installFileName=${OPTARG}
                 installListedPackages ${installFileName} >&2
+                exit 0
                 ;;
             i)
                 local packageName=${OPTARG}
                 installPackage ${packageName} >&2
+                exit 0
                 ;;
             l)
                 local installFileName=${OPTARG}
                 listStagedPackages $installFileName >&2
+                exit 0
                 ;;
             p)
                 listAllPackages >&2
+                exit 0
                 ;;
             h)
                 help 0 >&2
@@ -157,9 +161,11 @@ function main() {
                     echo " "
                     local installFileName=${defaultFileName}
                     installListedPackages ${installFileName} >&2
+                    exit 0
                 elif [ ${OPTARG} == l ]; then
                     local installFileName=${defaultFileName}
                     listStagedPackages $installFileName >&2
+                    exit 0
                 elif [ ${OPTARG} == i ]; then
                     echo "-i flag needs a package name to be installed"
                     help 1
