@@ -22,6 +22,7 @@ set -o pipefail  # Raises error if a pipeline fails
 # Storing all the packages available in a list
 availablePackages=(${SCRIPTPATH}/package-info/*)
 
+
 # Test whether the folder contains the required package
 function contains() {
     local n=$#
@@ -35,6 +36,7 @@ function contains() {
     echo "n"
     return 1
 }
+
 
 # To install all the programs listed in a file
 function installListedPackages() {
@@ -54,7 +56,8 @@ function installListedPackages() {
             echo "Package ${packageName} information is not available"
         fi
     done < ${SCRIPTPATH}/${packageConfigFile}
-}
+} 
+
 
 function help() {
     local status="$1"
@@ -74,6 +77,7 @@ function help() {
         exit 0
     fi
 }
+
 
 # Main function
 function main() {
@@ -104,5 +108,6 @@ function main() {
         esac
     done
 }
+
 
 main $@
