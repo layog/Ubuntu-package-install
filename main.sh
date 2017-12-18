@@ -78,6 +78,26 @@ function listStagedPackages() {
 }
 
 
+function listAllPackages() {
+    echo "Listing all available packages"
+    for package in ${availablePackages[@]}
+    do
+        # Setting IFS to /
+        local IFSCopy=$IFS
+        IFS="/"
+
+        local arr=($package)
+        local n=${#arr[@]}
+
+        echo ${arr[${n} - 1]}
+
+        # Resetting IFS
+        IFS=IFSCopy
+    done
+    echo " "
+}
+
+
 function help() {
     local status="$1"
 
@@ -104,7 +124,7 @@ function main() {
     local defaultFileName="install.config"
 
     # Reading arguments
-    while getopts ":a:i:l:" opt;
+    while getopts ":a:i:l:p" opt;
     do
         case ${opt} in
             a)
@@ -120,6 +140,9 @@ function main() {
             l)
                 local installFileName=${OPTARG}
                 listStagedPackages $installFileName >&2
+                ;;
+            p)
+                listAllPackages >&2
                 ;;
             :)
                 if [ ${OPTARG} == a ]; then
