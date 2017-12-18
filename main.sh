@@ -77,10 +77,32 @@ function help() {
 
 # Main function
 function main() {
-    # set install packages file name
-    installFileName="install.config"
+    # set default install packages file name
+    defaultFileName="install.config"
 
-    installListedPackages ${installFileName}
+    # Reading arguments
+    while getopts ":a:" opt;
+    do
+        case ${opt} in
+            a)
+                echo "Installing packages using ${OPTARG}"
+                echo " "
+                installFileName=${OPTARG}
+                installListedPackages ${installFileName} >&2
+                ;;
+            :)
+                if [ ${OPTARG} == a ]; then
+                    echo "Using default file for installing packages ${defaultFileName}"
+                    echo " "
+                    installFileName=${defaultFileName}
+                    installListedPackages ${installFileName} >&2
+                fi
+                ;;
+            \?)
+                echo "Unknown argument supplied ${OPTARG}"
+                help 1
+        esac
+    done
 }
 
-main
+main $@

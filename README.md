@@ -8,7 +8,7 @@ Install the required packages and softwares with one script in Ubuntu
 
 ---
 #### Features to add (to `main.sh`)
-- [ ] Argument support for install
+- [x] Argument support for install
 - [ ] Argument support for install `package-name`
 - [ ] Argument support to list all available packages
 - [ ] Argument support to list currently staged install packages
