@@ -13,3 +13,6 @@ Install the required packages and softwares with one script in Ubuntu
 - [x] Argument support to list all available packages
 - [x] Argument support to list currently staged install packages
 - [x] Argument support to print help info
+
+#### Other tasks
+- [ ] Add packages information in package-info directory
