@@ -56,7 +56,12 @@ function installListedPackages() {
     done < ${SCRIPTPATH}/${packageConfigFile}
 }
 
-# set install packages file name
-installFileName="install.config"
+# Main function
+function main() {
+    # set install packages file name
+    installFileName="install.config"
 
-installListedPackages ${installFileName}
+    installListedPackages ${installFileName}
+}
+
+main
