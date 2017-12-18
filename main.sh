@@ -56,6 +56,25 @@ function installListedPackages() {
     done < ${SCRIPTPATH}/${packageConfigFile}
 }
 
+function help() {
+    local status="$1"
+
+    # Echoing error if help is called with status 1
+    if [ $status -eq 1 ]; then
+        echo "Ubuntu Package Install: error"
+        echo " "
+    fi
+
+    echo "Usage:"
+
+    # Exiting
+    if [ $status -eq 1 ]; then
+        exit 1
+    else
+        exit 0
+    fi
+}
+
 # Main function
 function main() {
     # set install packages file name
