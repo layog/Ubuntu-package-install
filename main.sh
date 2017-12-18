@@ -66,6 +66,17 @@ function installPackage() {
 }
 
 
+function listStagedPackages() {
+    local packageConfigFile=$1
+    echo "Listing packages staged for installing in $packageConfigFile"
+
+    while read -r packageName
+    do
+        echo "${packageName}"
+    done < ${SCRIPTPATH}/${packageConfigFile}
+}
+
+
 function help() {
     local status="$1"
 
@@ -92,7 +103,7 @@ function main() {
     local defaultFileName="install.config"
 
     # Reading arguments
-    while getopts ":a:p:" opt;
+    while getopts ":a:p:l:" opt;
     do
         case ${opt} in
             a)
@@ -103,7 +114,11 @@ function main() {
                 ;;
             p)
                 local packageName=${OPTARG}
-                installPackage ${packageName}
+                installPackage ${packageName} >&2
+                ;;
+            l)
+                local installFileName=${OPTARG}
+                listStagedPackages $installFileName >&2
                 ;;
             :)
                 if [ ${OPTARG} == a ]; then
@@ -111,6 +126,9 @@ function main() {
                     echo " "
                     local installFileName=${defaultFileName}
                     installListedPackages ${installFileName} >&2
+                elif [ ${OPTARG} == l ]; then
+                    local installFileName=${defaultFileName}
+                    listStagedPackages $installFileName >&2
                 elif [ ${OPTARG} == p ]; then
                     echo "-p flag needs a package name to be installed"
                     help 1

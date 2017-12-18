@@ -11,5 +11,5 @@ Install the required packages and softwares with one script in Ubuntu
 - [x] Argument support for install
 - [x] Argument support for install `package-name`
 - [ ] Argument support to list all available packages
-- [ ] Argument support to list currently staged install packages
+- [x] Argument support to list currently staged install packages
 - [ ] Argument support to print help info
