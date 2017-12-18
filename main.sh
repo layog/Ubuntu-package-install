@@ -108,6 +108,10 @@ function help() {
     fi
 
     echo "Usage:"
+    echo "-a [file-name]:    Install packages listed in file-name, if given, otherwise use install.config"
+    echo "-i package-name:   Install a specific package"
+    echo "-l [file-name]:    List all the packages staged for installation in file-name, if given, otherwise use install.config"
+    echo "-p:                List all the packages available in package-info directory"
 
     # Exiting
     if [ $status -eq 1 ]; then
@@ -124,7 +128,7 @@ function main() {
     local defaultFileName="install.config"
 
     # Reading arguments
-    while getopts ":a:i:l:p" opt;
+    while getopts ":a:i:l:ph" opt;
     do
         case ${opt} in
             a)
@@ -143,6 +147,9 @@ function main() {
                 ;;
             p)
                 listAllPackages >&2
+                ;;
+            h)
+                help 0 >&2
                 ;;
             :)
                 if [ ${OPTARG} == a ]; then
