@@ -154,7 +154,7 @@ function main() {
                     local installFileName=${defaultFileName}
                     listStagedPackages $installFileName >&2
                 elif [ ${OPTARG} == i ]; then
-                    echo "-p flag needs a package name to be installed"
+                    echo "-i flag needs a package name to be installed"
                     help 1
                 fi
                 ;;
